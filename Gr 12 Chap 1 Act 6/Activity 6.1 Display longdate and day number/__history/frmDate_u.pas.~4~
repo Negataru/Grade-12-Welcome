@@ -1,0 +1,65 @@
+unit frmDate_u;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls,  ComCtrls, clsDate_u;
+
+type
+  TfrmDate = class(TForm)
+    pnlInput: TPanel;
+    lblDate: TLabel;
+    edtDate: TEdit;
+    pnlOutput: TPanel;
+    bmbReset: TBitBtn;
+    bmbClose: TBitBtn;
+    redOutput: TRichEdit;
+    btnDayNumber: TButton;
+    procedure bmbResetClick(Sender: TObject);
+    procedure btnDayNumberClick(Sender: TObject);
+    procedure btnLongDateClick(Sender: TObject);
+    procedure bmbCloseClick(Sender: TObject);
+  private
+     objDate : TDate;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDate: TfrmDate;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmDate.bmbResetClick(Sender: TObject);
+begin
+  edtDate.Clear;
+  redOutput.Clear;
+  edtDate.SetFocus;
+end;
+
+procedure TfrmDate.btnDayNumberClick(Sender: TObject);
+begin
+  objDate := TDate.Create(edtDate.Text);
+  redOutput.Clear;
+  redOutput.Lines.Add('Date : ' + edtDate.Text );
+  redOutput.Lines.Add('Long date : ' + objDate.LongDate);
+  redOutput.Lines.Add('Number of days that have passed : ' + IntToStr(objDate.DaysPassedInYear));
+end;
+
+procedure TfrmDate.btnLongDateClick(Sender: TObject);
+begin
+  objDate := TDate.Create(edtDate.Text);
+  redOutput.Clear;
+  redOutput.Lines.Add('Date : ' + edtDate.Text );
+ 
+end;
+
+procedure TfrmDate.bmbCloseClick(Sender: TObject);
+begin
+  objDate.Free;
+end;
+
+end.

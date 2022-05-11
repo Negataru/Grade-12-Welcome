@@ -1,0 +1,58 @@
+unit clsMovie_u;
+
+interface
+type
+   TMovie = class(TObject)
+     private
+	      fTitle :string;
+        fRating: integer;
+     public
+       	constructor Create(sTitle : string; rRating:integer);
+  	    function DeterminePopularity : string;
+        function GetTitle : string;
+        function GetRating : integer;
+        function ToString : string;
+    end;
+implementation
+  uses SysUtils;
+
+{ TEmployee }
+
+constructor TMovie.Create(sTitle: string; rRating: integer);
+begin
+   fTitle := sTitle;
+   fRating := rRating;
+end;
+
+function TMovie.DeterminePopularity: string;
+begin
+   case fRating of
+   1, 2, 3, 4: result := 'LOW';
+   5,6, 7    : result := 'Medium';
+   8,9,10    : result := 'HIGH'
+   else   result := 'Invalid';
+   end;
+
+end;
+
+function TMovie.GetTitle: string;
+begin
+   result := fTitle;
+end;
+
+function TMovie.GetRating: integer;
+begin
+   result := fRating;
+end;
+
+function TMovie.ToString: string;
+var
+  sStr : string;
+begin
+  sStr := 'Title   : ' + #9 + fTitle + #13;
+  sStr := sStr + 'Rating  : ' + #9 + IntToStr(fRating) + #13;
+  result := sStr;
+end;
+
+end.
+
